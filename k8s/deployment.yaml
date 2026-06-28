@@ -1,0 +1,79 @@
+# k8s/deployment.yaml
+# Job: Tell Kubernetes how to run the fraud detection API.
+# Kubernetes reads this file and creates containers (called Pods) for you.
+# It keeps them running, restarts them if they crash, and scales them up/down.
+#
+# Apply with: kubectl apply -f k8s/deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraud-detection-api          # name of this deployment
+  labels:
+    app: fraud-detection             # label used to find these pods later
+
+spec:
+  replicas: 2                        # run 2 containers at all times
+                                     # if one crashes, the other keeps serving
+                                     # Kubernetes restarts the crashed one automatically
+
+  selector:
+    matchLabels:
+      app: fraud-detection           # manage pods with this label
+
+  template:
+    metadata:
+      labels:
+        app: fraud-detection
+
+    spec:
+      containers:
+      - name: fraud-api
+        image: fraud-detection:latest  # the Docker image we built earlier
+        imagePullPolicy: Never         # use local image, don't pull from Docker Hub
+                                       # change to Always if pushing to Docker Hub or ECR
+
+        ports:
+        - containerPort: 8000          # the port FastAPI listens on inside container
+
+        # ── Resource Limits ──────────────────────────────────────────────────
+        # requests = minimum guaranteed resources for this container
+        # limits   = maximum it can use before Kubernetes throttles/kills it
+        # Setting these prevents one container from eating all server resources.
+
+        resources:
+          requests:
+            memory: "256Mi"            # guarantee 256MB RAM
+            cpu: "250m"                # guarantee 0.25 CPU cores (250 millicores)
+          limits:
+            memory: "512Mi"            # never use more than 512MB RAM
+            cpu: "500m"                # never use more than 0.5 CPU cores
+
+        # ── Health Checks ────────────────────────────────────────────────────
+        # livenessProbe  = is the container alive? if not → restart it
+        # readinessProbe = is the container ready to receive traffic?
+        #                  if not → remove it from load balancer temporarily
+        # Both hit the /health endpoint we built in FastAPI.
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30      # wait 30s before first check (model loading takes time)
+          periodSeconds: 10            # check every 10 seconds
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20      # wait 20s before marking as ready
+          periodSeconds: 5             # check every 5 seconds
+
+        # ── Environment Variables ────────────────────────────────────────────
+        env:
+        - name: MODEL_PATH
+          value: "outputs/model.pkl"
+        - name: SCALER_PATH
+          value: "outputs/scaler.pkl"
+        - name: THRESHOLD_PATH
+          value: "outputs/threshold.txt"

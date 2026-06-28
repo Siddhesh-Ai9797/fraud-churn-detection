@@ -1,0 +1,25 @@
+# k8s/service.yaml
+# Job: Expose the fraud detection API to the outside world.
+# Pods have internal IPs that change every time they restart.
+# A Service gives you a stable URL that always points to healthy pods.
+# Think of it as a receptionist — you always call the receptionist,
+# and they connect you to whichever agent is available.
+#
+# Apply with: kubectl apply -f k8s/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fraud-detection-service
+
+spec:
+  selector:
+    app: fraud-detection             # route traffic to pods with this label
+
+  ports:
+  - protocol: TCP
+    port: 80                         # external port (what you call from outside)
+    targetPort: 8000                 # internal port (what FastAPI listens on)
+
+  type: LoadBalancer                 # on cloud (AWS/GCP/Azure) this creates a real load balancer
+                                     # on minikube locally, use: minikube service fraud-detection-service

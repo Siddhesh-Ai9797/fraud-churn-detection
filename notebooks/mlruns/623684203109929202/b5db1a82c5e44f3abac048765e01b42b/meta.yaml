@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/sidpa/ML%20Projects/ML_Project_3/notebooks/mlruns/623684203109929202/b5db1a82c5e44f3abac048765e01b42b/artifacts
+end_time: 1782603025422
+entry_point_name: ''
+experiment_id: '623684203109929202'
+lifecycle_stage: active
+run_id: b5db1a82c5e44f3abac048765e01b42b
+run_name: cost_optimized_threshold
+run_uuid: b5db1a82c5e44f3abac048765e01b42b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1782603025371
+status: 3
+tags: []
+user_id: sidpa

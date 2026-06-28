@@ -1,0 +1,31 @@
+# .dockerignore
+# Tell Docker what to skip when building the image.
+# Smaller image = faster builds, faster deployments.
+
+# Raw data — 150MB CSV, model doesn't need it at serving time
+data/
+
+# Notebooks — research only, not needed in production
+*.ipynb
+.ipynb_checkpoints/
+
+# Python cache — Docker will recreate these
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# MLflow tracking files — not needed inside container
+mlruns/
+
+# Git files
+.git/
+.gitignore
+
+# Environment files
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db

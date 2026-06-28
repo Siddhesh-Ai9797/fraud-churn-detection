@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/sidpa/ML%20Projects/ML_Project_3/notebooks/mlruns/995395082023736563/0f0bccd5d7fb4a3fba97a460d9205e24/artifacts
+end_time: 1782539238860
+entry_point_name: ''
+experiment_id: '995395082023736563'
+lifecycle_stage: active
+run_id: 0f0bccd5d7fb4a3fba97a460d9205e24
+run_name: svm_rbf
+run_uuid: 0f0bccd5d7fb4a3fba97a460d9205e24
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1782539233035
+status: 3
+tags: []
+user_id: sidpa

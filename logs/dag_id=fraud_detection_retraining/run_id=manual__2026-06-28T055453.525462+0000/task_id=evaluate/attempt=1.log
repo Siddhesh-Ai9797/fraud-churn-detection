@@ -1,0 +1,132 @@
+[2026-06-28T05:55:06.566+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-06-28T05:55:06.582+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fraud_detection_retraining.evaluate manual__2026-06-28T05:54:53.525462+00:00 [queued]>
+[2026-06-28T05:55:06.587+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fraud_detection_retraining.evaluate manual__2026-06-28T05:54:53.525462+00:00 [queued]>
+[2026-06-28T05:55:06.589+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 2
+[2026-06-28T05:55:06.596+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): evaluate> on 2026-06-28 05:54:53.525462+00:00
+[2026-06-28T05:55:06.601+0000] {standard_task_runner.py:63} INFO - Started process 399 to run task
+[2026-06-28T05:55:06.603+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'fraud_detection_retraining', 'evaluate', 'manual__2026-06-28T05:54:53.525462+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/fraud_retrain_dag.py', '--cfg-path', '/tmp/tmphn2q1fku']
+[2026-06-28T05:55:06.604+0000] {standard_task_runner.py:91} INFO - Job 10: Subtask evaluate
+[2026-06-28T05:55:06.681+0000] {task_command.py:426} INFO - Running <TaskInstance: fraud_detection_retraining.evaluate manual__2026-06-28T05:54:53.525462+00:00 [running]> on host d6ce0f9cdcfd
+[2026-06-28T05:55:06.759+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sidpa' AIRFLOW_CTX_DAG_ID='fraud_detection_retraining' AIRFLOW_CTX_TASK_ID='evaluate' AIRFLOW_CTX_EXECUTION_DATE='2026-06-28T05:54:53.525462+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-28T05:54:53.525462+00:00'
+[2026-06-28T05:55:06.759+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-06-28T05:55:06.916+0000] {font_manager.py:1847} INFO - generated new fontManager
+[2026-06-28T05:55:08.295+0000] {logging_mixin.py:188} INFO - Starting evaluation...
+[2026-06-28T05:55:09.486+0000] {logging_mixin.py:188} INFO - Loaded 284,807 rows | Fraud rate: 0.1727%
+[2026-06-28T05:55:09.554+0000] {logging_mixin.py:188} INFO - Scaler saved → outputs/scaler.pkl
+[2026-06-28T05:55:09.592+0000] {logging_mixin.py:188} INFO - X shape: (284807, 30) | Frauds: 492 | Normal: 284315
+[2026-06-28T05:55:09.677+0000] {logging_mixin.py:188} INFO - Train: 227,845 rows | Test: 56,962 rows
+[2026-06-28T05:55:09.678+0000] {logging_mixin.py:188} INFO - Train frauds: 394 | Test frauds: 98
+[2026-06-28T05:55:09.679+0000] {logging_mixin.py:188} INFO - Class ratio (scale_pos_weight): 577.29
+[2026-06-28T05:55:09.944+0000] {logging_mixin.py:188} WARNING - 2026/06/28 05:55:09 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2026-06-28T05:55:09.946+0000] {logging_mixin.py:188} WARNING - 2026/06/28 05:55:09 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git branch is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2026-06-28T05:55:09.947+0000] {logging_mixin.py:188} WARNING - 2026/06/28 05:55:09 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git repository URL is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2026-06-28T05:55:10.645+0000] {logging_mixin.py:188} INFO - Model training complete.
+[2026-06-28T05:55:10.665+0000] {logging_mixin.py:188} INFO - 
+Evaluation at default threshold (0.5):
+[2026-06-28T05:55:10.672+0000] {logging_mixin.py:188} INFO -               precision    recall  f1-score   support
+
+      Normal       1.00      1.00      1.00     56864
+       Fraud       0.78      0.84      0.81        98
+
+    accuracy                           1.00     56962
+   macro avg       0.89      0.92      0.90     56962
+weighted avg       1.00      1.00      1.00     56962
+[2026-06-28T05:55:10.673+0000] {logging_mixin.py:188} INFO - AUC-ROC: 0.9772
+[2026-06-28T05:55:10.783+0000] {logging_mixin.py:188} WARNING - 2026/06/28 05:55:10 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+[2026-06-28T05:55:13.646+0000] {logging_mixin.py:188} INFO - 
+MLflow run logged.
+[2026-06-28T05:55:13.647+0000] {logging_mixin.py:188} INFO - AUC-ROC        : 0.9772
+[2026-06-28T05:55:13.647+0000] {logging_mixin.py:188} INFO - Fraud Precision: 0.7810
+[2026-06-28T05:55:13.648+0000] {logging_mixin.py:188} INFO - Fraud Recall   : 0.8367
+[2026-06-28T05:55:13.648+0000] {logging_mixin.py:188} INFO - Fraud F1       : 0.8079
+[2026-06-28T05:55:13.669+0000] {logging_mixin.py:188} INFO - Model saved → outputs/model.pkl
+[2026-06-28T05:55:13.669+0000] {logging_mixin.py:188} INFO - 
+── Baseline: Default Threshold 0.5 ──
+[2026-06-28T05:55:13.682+0000] {logging_mixin.py:188} INFO - 
+Results at threshold 0.50:
+[2026-06-28T05:55:13.690+0000] {logging_mixin.py:188} INFO -               precision    recall  f1-score   support
+
+      Normal       1.00      1.00      1.00     56864
+       Fraud       0.78      0.84      0.81        98
+
+    accuracy                           1.00     56962
+   macro avg       0.89      0.92      0.90     56962
+weighted avg       1.00      1.00      1.00     56962
+[2026-06-28T05:55:13.690+0000] {logging_mixin.py:188} INFO - Missed frauds : 16 × Rs.10,000 = Rs.160,000
+[2026-06-28T05:55:13.691+0000] {logging_mixin.py:188} INFO - False alarms  : 23 × Rs.500 = Rs.11,500
+[2026-06-28T05:55:13.691+0000] {logging_mixin.py:188} INFO - Total cost    : Rs.171,500
+[2026-06-28T05:55:13.692+0000] {logging_mixin.py:188} INFO - 
+── Sweeping all thresholds ──
+[2026-06-28T05:55:13.706+0000] {logging_mixin.py:188} INFO - Best threshold : 0.35
+[2026-06-28T05:55:13.706+0000] {logging_mixin.py:188} INFO - Minimum cost   : Rs.136,000
+[2026-06-28T05:55:13.707+0000] {logging_mixin.py:188} INFO - 
+── Optimized: Best Business Threshold ──
+[2026-06-28T05:55:13.715+0000] {logging_mixin.py:188} INFO - 
+Results at threshold 0.35:
+[2026-06-28T05:55:13.722+0000] {logging_mixin.py:188} INFO -               precision    recall  f1-score   support
+
+      Normal       1.00      1.00      1.00     56864
+       Fraud       0.73      0.88      0.80        98
+
+    accuracy                           1.00     56962
+   macro avg       0.86      0.94      0.90     56962
+weighted avg       1.00      1.00      1.00     56962
+[2026-06-28T05:55:13.723+0000] {logging_mixin.py:188} INFO - Missed frauds : 12 × Rs.10,000 = Rs.120,000
+[2026-06-28T05:55:13.723+0000] {logging_mixin.py:188} INFO - False alarms  : 32 × Rs.500 = Rs.16,000
+[2026-06-28T05:55:13.724+0000] {logging_mixin.py:188} INFO - Total cost    : Rs.136,000
+[2026-06-28T05:55:13.724+0000] {logging_mixin.py:188} INFO - 
+Cost saved by threshold optimization: Rs.35,500
+[2026-06-28T05:55:13.828+0000] {logging_mixin.py:188} INFO - Plot saved → outputs/cost_vs_threshold.png
+[2026-06-28T05:55:13.832+0000] {logging_mixin.py:188} INFO - Threshold saved → outputs/threshold.txt
+[2026-06-28T05:55:13.943+0000] {logging_mixin.py:188} INFO - Evaluation complete. Best threshold: 0.35
+[2026-06-28T05:55:13.944+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-06-28T05:55:13.944+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-06-28T05:55:13.952+0000] {taskinstance.py:1205} INFO - Marking task as SUCCESS. dag_id=fraud_detection_retraining, task_id=evaluate, execution_date=20260628T055453, start_date=20260628T055506, end_date=20260628T055513
+[2026-06-28T05:55:13.988+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-06-28T05:55:14.001+0000] {taskinstance.py:3482} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-06-28T05:55:14.004+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,42 @@
+# k8s/hpa.yaml
+# HPA = Horizontal Pod Autoscaler
+# Job: Automatically scale the number of containers up or down based on traffic.
+# This is what handles Diwali/IPL traffic spikes automatically.
+#
+# How it works:
+# - Kubernetes monitors CPU usage of all fraud-detection pods every 15 seconds
+# - If average CPU > 70% → add more pods (up to 10 maximum)
+# - If average CPU < 70% → remove pods (down to 2 minimum)
+# - Scale up is fast (seconds), scale down is slow (5 minutes) to avoid flapping
+#
+# Cricket analogy:
+# Normal day  → 2 fielders on the boundary
+# IPL final   → crowd goes crazy, 10 fielders needed
+# Match ends  → slowly send fielders back, don't all leave at once
+#
+# Apply with: kubectl apply -f k8s/hpa.yaml
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fraud-detection-hpa
+
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: fraud-detection-api        # which deployment to scale
+
+  minReplicas: 2                     # always keep at least 2 pods running
+                                     # so if one crashes, traffic still flows
+
+  maxReplicas: 10                    # never run more than 10 pods
+                                     # prevents runaway costs on cloud
+
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70       # scale up when average CPU hits 70%

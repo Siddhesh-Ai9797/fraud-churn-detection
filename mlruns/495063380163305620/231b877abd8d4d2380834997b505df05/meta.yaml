@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/sidpa/ML%20Projects/ML_Project_3/mlruns/495063380163305620/231b877abd8d4d2380834997b505df05/artifacts
+end_time: 1782622954708
+entry_point_name: ''
+experiment_id: '495063380163305620'
+lifecycle_stage: active
+run_id: 231b877abd8d4d2380834997b505df05
+run_name: threshold_optimization
+run_uuid: 231b877abd8d4d2380834997b505df05
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1782622954584
+status: 3
+tags: []
+user_id: sidpa
