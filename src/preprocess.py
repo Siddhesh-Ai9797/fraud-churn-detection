@@ -29,15 +29,17 @@ def scale_features(df: pd.DataFrame):
     We return the scaler because we must save it and reuse it at prediction time.
     Using a different scaler at prediction time = wrong mean/std = broken model.
     """
-    scaler = StandardScaler()
+    # One scaler per column. Reusing a single scaler for both columns kept only
+    # the Time statistics, so the API scaled Amount with Time's mean and std.
+    scalers = {"Amount": StandardScaler(), "Time": StandardScaler()}
 
     df = df.copy()  # never modify the original dataframe
-    df["Amount_scaled"] = scaler.fit_transform(df[["Amount"]])
-    df["Time_scaled"]   = scaler.fit_transform(df[["Time"]])
+    df["Amount_scaled"] = scalers["Amount"].fit_transform(df[["Amount"]]).ravel()
+    df["Time_scaled"]   = scalers["Time"].fit_transform(df[["Time"]]).ravel()
 
     df = df.drop(columns=["Amount", "Time"])  # drop raw columns, keep scaled ones
 
-    return df, scaler
+    return df, scalers
 
 
 # ── 3. Features and Target ────────────────────────────────────────────────────
