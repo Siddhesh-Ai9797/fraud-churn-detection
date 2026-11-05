@@ -48,6 +48,25 @@ except FileNotFoundError:
     print(f"Threshold file not found. Using default: {threshold}")
 
 
+def scale_amount_time(amount: float, time: float):
+    """
+    New scaler files hold one StandardScaler per column: {"Amount": ..., "Time": ...}.
+    Older files hold a single scaler that was last fitted on Time; for those,
+    Amount is scaled with Time's statistics, which is the bug this format fixes.
+    Re-run src/preprocess.py to regenerate the scaler file.
+    """
+    if isinstance(scaler, dict):
+        return (
+            scaler["Amount"].transform([[amount]])[0][0],
+            scaler["Time"].transform([[time]])[0][0],
+        )
+    return scaler.transform([[amount]])[0][0], scaler.transform([[time]])[0][0]
+
+
+if not isinstance(scaler, dict):
+    print("WARNING: legacy scaler file. Amount is scaled with Time statistics. Re-run src/preprocess.py.")
+
+
 # ── 3. Request Schema ─────────────────────────────────────────────────────────
 # Pydantic BaseModel defines exactly what JSON the API expects.
 # If any field is missing or wrong type, FastAPI returns a clear 422 error.
@@ -93,10 +112,8 @@ def predict(transaction: Transaction):
     5. Return decision + probability + threshold used
     """
     try:
-        # Step 1 — Scale Amount and Time separately
-        # scaler was fitted on [Amount, Time] together during training
-        amount_scaled = scaler.transform([[transaction.Amount]])[0][0]
-        time_scaled   = scaler.transform([[transaction.Time]])[0][0]
+        # Step 1 — Scale Amount and Time, each with its own training statistics
+        amount_scaled, time_scaled = scale_amount_time(transaction.Amount, transaction.Time)
 
         # Step 2 — Build feature array in exact training order
         features = np.array([[

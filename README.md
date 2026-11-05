@@ -1,5 +1,7 @@
 # 🔍 Credit Card Fraud Detection — ML + MLOps End-to-End System
 
+[![CI](https://github.com/Siddhesh-Ai9797/fraud-churn-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Siddhesh-Ai9797/fraud-churn-detection/actions/workflows/ci.yml)
+
 A production-grade fraud detection system built on the Kaggle Credit Card Fraud dataset.  
 Covers SVM kernel comparison, class imbalance handling, business cost threshold optimization,  
 and a full MLOps stack: FastAPI → Docker → Airflow → Kubernetes.
@@ -182,6 +184,17 @@ kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/hpa.yaml
 minikube service fraud-detection-service
 ```
+
+---
+
+## 🧪 Tests
+
+```bash
+pip install -r requirements.txt pytest httpx
+python -m pytest -q
+```
+
+Tests cover the health check, prediction and batch endpoints, threshold logic, input validation, and per column feature scaling. GitHub Actions runs them on every push, then builds the Docker image and checks that `/health` responds.
 
 ---
 
